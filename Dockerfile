@@ -1,20 +1,21 @@
-# Use Node 20 (required by your project)
 FROM node:20
 
-# Set working directory inside container
 WORKDIR /app
 
-# Install pnpm globally
+# Install pnpm
 RUN npm install -g pnpm
 
-# Copy all files into container
+# Copy files
 COPY . .
 
 # Install dependencies
 RUN pnpm install
 
-# Expose port (we’ll adjust later if needed)
+# 🔥 BUILD ALL PACKAGES FIRST (IMPORTANT)
+RUN pnpm build
+
+# Expose correct port (Next.js uses 3000)
 EXPOSE 3000
 
-# Start the app
-CMD ["pnpm", "dev"]
+# Run only frontend (stable)
+CMD ["pnpm", "dev:web"]
