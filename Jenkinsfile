@@ -18,7 +18,9 @@ pipeline {
 
         stage('Prepare env') {
             steps {
-                sh 'cp /home/ubuntu/Nodejsproject/.env $WORKSPACE/apps/api/.env'
+                withCredentials([file(credentialsId: 'safemeet-env', variable: 'ENV_FILE')]) {
+                    sh 'cp $ENV_FILE $WORKSPACE/apps/api/.env'
+                }
             }
         }
 
