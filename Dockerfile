@@ -15,8 +15,6 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-COPY apps/api/.env ./apps/api/.env
-
 RUN NODE_OPTIONS="--max-old-space-size=2048" pnpm build
 
 # ── Stage 2: API Runner ───────────────────────────────────

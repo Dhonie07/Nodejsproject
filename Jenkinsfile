@@ -16,6 +16,12 @@ pipeline {
             }
         }
 
+        stage('Prepare env') {
+            steps {
+                sh 'cp /home/ubuntu/Nodejsproject/.env $WORKSPACE/apps/api/.env'
+            }
+        }
+
         stage('Login to ECR') {
             steps {
                 sh '''
